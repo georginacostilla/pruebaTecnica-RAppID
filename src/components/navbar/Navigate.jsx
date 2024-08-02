@@ -1,16 +1,18 @@
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import logo from '../../assets/img/logoDosPokemon.png'
+import '../navbar/navigate.css'
 
 const Navigate = () => {
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar expand="lg" bg="dark" data-bs-theme="dark">
+        <Container className='m-4'>
+          <Navbar.Brand href="#home"><img className='imgStyle' src={logo} alt="logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link>Inicio</Nav.Link>
+              <Nav.Link>Favoritos ⭐</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
