@@ -5,9 +5,9 @@ import '../home/card.css'
 const DetailCard = () => {
   return (
     <>
-      <Container className="mt-3">
+      <Container className="d-flex justify-content-center align-items-center vh-75 mt-5">
         <Row>
-          <Col className='mx-2 my-2 m-2 mt-3'>
+          <Col>
             <Card style={{ width: '16rem' }} className="card">
               <Card.Img variant="top" src={"https://www.inspireuplift.com/resizer/?image=https://cdn.inspireuplift.com/uploads/images/seller_products/1687191179_Alelliott-pokemon-picachu-pokemon.jpeg&width=600&height=600&quality=90&format=auto&fit=pad"} alt={""} />
               <Card.Body className="text-center bg-white">
