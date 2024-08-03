@@ -1,12 +1,16 @@
 import Rutas from './components/routes/Rutas'
-import './App.css'
+import Navigate from './components/navbar/Navigate.jsx'
+import Footer from './components/footer/Footer.jsx'
 
 function App() {
 
   return (
     <>
-      <h1>hola</h1>
-      <Rutas />
+      <div className='bg-black'>
+        <Navigate />
+        <Rutas />
+        <Footer />
+      </div>
     </>
   )
 }
