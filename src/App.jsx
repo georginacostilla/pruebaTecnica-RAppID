@@ -5,7 +5,7 @@ function App() {
 
   return (
     <>
-      <div className='bg-dark'>
+      <div className='bg-black'>
         <Navigate />
         <Rutas />
       </div>

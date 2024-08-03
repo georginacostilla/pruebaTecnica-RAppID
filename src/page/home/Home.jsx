@@ -1,36 +1,24 @@
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import useCardPokemon from "../../stores/CardPokemon-Store";
-import { useEffect } from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import './card.css'
+import BuscadorNombre from "../../components/buscador/BuscadorNombre";
 
 const Home = () => {
-  const cardsPokemon = useCardPokemon((state) => state.cardsPokemon);
-  // const loading = useCardPokemon((state) => state.loading);
-  // const error = useCardPokemon((state) => state.error);
-  const getCardPokemon = useCardPokemon((state) => state.getCardPokemon);
-
-  useEffect(() => {
-    getCardPokemon();
-  }, [getCardPokemon]);
 
   return (
     <>
       <Container className="mt-3">
+        <BuscadorNombre></BuscadorNombre>
         <Row>
-          {cardsPokemon.length > 0 ? (
-            cardsPokemon.map((cardPokemon) => (
-              <Col className='mx-2 my-2'>
-                <Card style={{ width: '18rem' }}>
-                  {/* <Card.Img variant="top" src={""} alt={cardPokemon.name} /> */}
-                  <Card.Body>
-                    <Card.Title>{cardPokemon.name}</Card.Title>
-                    <Button variant="primary">Ver</Button>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))
-          ) : (
-            <p>Pokémon no disponible.</p>
-          )}
+          <Col className='mx-2 my-2 m-2 mt-3'>
+            <Card style={{ width: '16rem' }} className="card">
+              <Card.Img variant="top" src={"https://www.inspireuplift.com/resizer/?image=https://cdn.inspireuplift.com/uploads/images/seller_products/1687191179_Alelliott-pokemon-picachu-pokemon.jpeg&width=600&height=600&quality=90&format=auto&fit=pad"} alt={""} />
+              <Card.Body className="text-center bg-white">
+                <Card.Title>Pokemon</Card.Title>
+                <Link to={"/detailCard"}><button>Ver más</button></Link>
+              </Card.Body>
+            </Card>
+          </Col>
         </Row>
       </Container>
     </>
