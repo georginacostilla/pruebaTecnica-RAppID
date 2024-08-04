@@ -1,26 +1,46 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import useCardPokemon from "../../stores/CardPokemon";
 import '../home/card.css'
 
 const DetailCard = () => {
+
+  const cardPoke = useCardPokemon((state) => state.cardPoke);
+  const getCardsPokemonByName = useCardPokemon((state) => state.getCardsPokemonByName);
+  const nombre = useParams()
+
+  useEffect(() => {
+    getCardsPokemonByName(nombre);
+  }, [getCardsPokemonByName]);
+
   return (
     <>
-      <Container className="d-flex justify-content-center align-items-center vh-75 mt-5">
-        <Row>
+      <Container className="d-flex justify-content-center align-items-center vh-75 mt-3">
+        {cardPoke ? <Row>
           <Col>
-            <Card style={{ width: '16rem' }} className="card">
-              <Card.Img variant="top" src={"https://www.inspireuplift.com/resizer/?image=https://cdn.inspireuplift.com/uploads/images/seller_products/1687191179_Alelliott-pokemon-picachu-pokemon.jpeg&width=600&height=600&quality=90&format=auto&fit=pad"} alt={""} />
+            <Card style={{ width: '18rem' }} className="card">
+              <Card.Img variant="top" src={cardPoke.sprites.front_default} alt={cardPoke.name} />
               <Card.Body className="text-center bg-white">
-                <Card.Title>Pokemon</Card.Title>
+                <Card.Title className="mb-3">{cardPoke.name}</Card.Title>
+                <Card.Text><strong>Tipo:</strong> {cardPoke.types[0].type.name}</Card.Text>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up the
-                  bulk of the card's content.
+                  <strong>Habilidades:</strong>
+                  <ul className="list-group">
+                    {cardPoke.abilities.map((habilidad, index) => (
+                      <li className="list-group-item border-0" key={index}>{habilidad.ability.name}</li>
+                    ))}
+                  </ul>
                 </Card.Text>
-                <Link to={"/favoritos"}><button>Agregar a favoritos</button></Link>
+                <Card.Text><strong>Estadísticas:</strong></Card.Text>
+                <Card.Text>Vida inicial: {cardPoke.stats[0].base_stat}</Card.Text>
+                <Card.Text>Ataque inicial: {cardPoke.stats[1].base_stat}</Card.Text>
+                <Card.Text>Defensa inicial: {cardPoke.stats[2].base_stat}</Card.Text>
+                <Link to={`/favoritos/${cardPoke.name}`}><button>Agregar a favoritos</button></Link>
               </Card.Body>
             </Card>
           </Col>
-        </Row>
+        </Row> : <><h1>Ups... Error</h1></>}
       </Container>
     </>
   )

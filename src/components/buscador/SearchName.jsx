@@ -1,6 +1,6 @@
 import { Form, Container } from 'react-bootstrap';
 
-const BuscadorNombre = () => {
+const SearchName = ({buscar, handleFiltrar}) => {
   return (
     <>
       <Container>
@@ -9,10 +9,11 @@ const BuscadorNombre = () => {
             <Form.Label className="text-light">Buscar Pokémon:</Form.Label>
             <Form.Control
               type="text"
-              value={""}
-              onChange={""}
+              value={buscar}
+              onChange={handleFiltrar}
               placeholder="escribe aquí "
-              className="w-25"
+              className="w-100 w-lg-25"
+              style={{ maxWidth: '300px' }}
             />
           </Form.Group>
         </Form>
@@ -21,4 +22,4 @@ const BuscadorNombre = () => {
   )
 }
 
-export default BuscadorNombre;
+export default SearchName;
