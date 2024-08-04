@@ -3,6 +3,7 @@ import { create } from 'zustand';
 
 const useCardPokemon = create((set) => ({
   cardsPoke: [],
+  favoritos: [],
   cardPoke: null,
   loading: false,
   error: null,
@@ -25,15 +26,24 @@ const useCardPokemon = create((set) => ({
     }
   },
 
-  getCardsPokemonByID: async (id) => {
+  getCardsPokemonByName: async (name) => {
     set({ loading: true, error: null });
     try {
-      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.name}`);
       set({ cardPoke: data, loading: false });
+      console.log(cardPoke)
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
+
+  addFavorito: (name) => set((state) => {
+
+    if (state.favoritos.includes(name)) {
+      return state;
+    }
+    return { favoritos: [...state.favoritos, name] };
+  }),
 }));
 
 export default useCardPokemon;
