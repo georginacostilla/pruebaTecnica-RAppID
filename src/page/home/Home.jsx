@@ -1,28 +1,54 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import './card.css'
+import './card.css';
 import BuscadorNombre from "../../components/buscador/BuscadorNombre";
+import useCardPokemon from "../../stores/CardPokemon";
+import { useEffect } from "react";
 
 const Home = () => {
+  const cardsPoke = useCardPokemon((state) => state.cardsPoke);
+  const loading = useCardPokemon((state) => state.loading);
+  const error = useCardPokemon((state) => state.error);
+  const getCardsPokemon = useCardPokemon((state) => state.getCardsPokemon);
+
+  useEffect(() => {
+    getCardsPokemon();
+  }, [getCardsPokemon]);
+
+  if (loading) {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center">Error: {error}</div>;
+  }
 
   return (
-    <>
-      <Container className="mt-3">
-        <BuscadorNombre></BuscadorNombre>
-        <Row>
-          <Col xs={12} md={6} lg={4} className='mx-2 my-2 m-2 mt-3'>
-            <Card style={{ width: '16rem' }} className="card">
-              <Card.Img variant="top" src={"https://www.inspireuplift.com/resizer/?image=https://cdn.inspireuplift.com/uploads/images/seller_products/1687191179_Alelliott-pokemon-picachu-pokemon.jpeg&width=600&height=600&quality=90&format=auto&fit=pad"} alt={""} />
-              <Card.Body className="text-center bg-white">
-                <Card.Title>Pokemon</Card.Title>
-                <Link to={"/detailCard"}><button>Ver más</button></Link>
-              </Card.Body>
-            </Card>
+    <Container className="mt-3">
+      <BuscadorNombre />
+      <Row>
+        {cardsPoke.length > 0 ? (
+          cardsPoke.map((card, index) => (
+            <Col className='mx-2 my-2 d-flex justify-content-center align-items-center' key={index}>
+              <Card style={{ width: '16rem' }} className="card">
+                <Card.Img variant="top" src={card.url} alt={card.name} />
+                <Card.Body className="text-center bg-white">
+                  <Card.Title>{card.name}</Card.Title>
+                  <Link to={`/detailCard/${card.index}`}>
+                    <button>Ver más</button>
+                  </Link>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))
+        ) : (
+          <Col xs={12} className='text-center'>
+            <p>No hay cards disponibles</p>
           </Col>
-        </Row>
-      </Container>
-    </>
-  )
+        )}
+      </Row>
+    </Container>
+  );
 }
 
 export default Home;
