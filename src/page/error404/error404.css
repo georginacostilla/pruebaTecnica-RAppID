@@ -1,0 +1,22 @@
+.contenedor-404 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 70px;
+}
+
+.parrafo1 {
+	color: #778899;
+	font-size: 80px;
+}
+
+.parrafo2 {
+	color: #778899;
+	font-size: 120px;
+
+}
+
+.parrafo3 {
+	color: white;
+	font-size: 30px;
+}
