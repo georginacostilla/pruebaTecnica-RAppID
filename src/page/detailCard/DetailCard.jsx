@@ -2,7 +2,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import useCardPokemon from "../../stores/CardPokemon";
-import '../home/card.css'
+import '../home/card.css';
 
 const DetailCard = () => {
 

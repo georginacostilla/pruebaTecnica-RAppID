@@ -1,5 +1,5 @@
-import { Col, Container, Row } from 'react-bootstrap'
-import '../error404/error404.css'
+import { Col, Container, Row } from 'react-bootstrap';
+import '../error404/error404.css';
 
 const Error404 = () => {
   return (

@@ -1,8 +1,8 @@
-import { Routes, Route } from 'react-router-dom'
-import Home from '../../page/home/Home'
-import Error404 from '../../page/error404/Error404'
-import DetailCard from '../../page/detailCard/DetailCard.jsx'
-import Favoritos from '../../page/favoritos/Favoritos.jsx'
+import { Routes, Route } from 'react-router-dom';
+import Home from '../../page/home/Home';
+import Error404 from '../../page/error404/Error404';
+import DetailCard from '../../page/detailCard/DetailCard.jsx';
+import Favoritos from '../../page/favoritos/Favoritos.jsx';
 
 const Rutas = () => {
   return (
