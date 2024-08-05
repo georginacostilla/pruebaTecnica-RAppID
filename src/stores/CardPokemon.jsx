@@ -8,6 +8,7 @@ const useCardPokemon = create((set) => ({
   cardPoke: null,
   loading: false,
   error: null,
+  typeFilter: '',
 
   getCardsPokemon: async () => {
     set({ loading: true, error: null });
@@ -19,6 +20,7 @@ const useCardPokemon = create((set) => ({
           name: data.name,
           url: data.sprites.front_default,
           index: data.id,
+          types: data.types.map(typeInfo => typeInfo.type.name),
         };
       }));
       set({ cardsPoke: cards, loading: false });
@@ -26,6 +28,8 @@ const useCardPokemon = create((set) => ({
       set({ error: error.message, loading: false });
     }
   },
+
+  setTypeFilter: (type) => set({ typeFilter: type }),
 
   getCardsPokemonByName: async (name) => {
     set({ loading: true, error: null });

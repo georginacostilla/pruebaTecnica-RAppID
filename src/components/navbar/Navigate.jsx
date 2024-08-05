@@ -1,7 +1,7 @@
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import logo from '../../assets/img/logoDosPokemon.png'
-import '../navbar/navigate.css'
-import { Link } from 'react-router-dom'
+import { Container, Nav, Navbar } from 'react-bootstrap';
+import logo from '../../assets/img/logoDosPokemon.png';
+import '../navbar/navigate.css';
+import { Link } from 'react-router-dom';
 
 const Navigate = () => {
   return (

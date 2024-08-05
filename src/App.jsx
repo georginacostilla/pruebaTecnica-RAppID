@@ -1,6 +1,6 @@
-import Rutas from './components/routes/Rutas'
-import Navigate from './components/navbar/Navigate.jsx'
-import Footer from './components/footer/Footer.jsx'
+import Rutas from './components/routes/Rutas';
+import Navigate from './components/navbar/Navigate.jsx';
+import Footer from './components/footer/Footer.jsx';
 
 function App() {
 
