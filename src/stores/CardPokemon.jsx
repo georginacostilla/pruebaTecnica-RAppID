@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { create } from 'zustand';
+import { db, doc, setDoc, getDoc } from '../firebaseConfig.js';
 
 const useCardPokemon = create((set) => ({
   cardsPoke: [],
@@ -31,19 +32,47 @@ const useCardPokemon = create((set) => ({
     try {
       const { data } = await axios.get(`https://pokeapi.co/api/v2/pokemon/${name.name}`);
       set({ cardPoke: data, loading: false });
-      console.log(cardPoke)
     } catch (error) {
       set({ error: error.message, loading: false });
     }
   },
 
-  addFavorito: (name) => set((state) => {
-
-    if (state.favoritos.includes(name)) {
-      return state;
+  loadFavoritos: async () => {
+    try {
+      const docRef = doc(db, 'favoritos', 'user');
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        set({ favoritos: docSnap.data().favoritos || [] });
+      } else {
+        set({ favoritos: [] });
+      }
+    } catch (error) {
+      console.error('Error al recuperar favoritos: ', error);
+      set({ favoritos: [] });
     }
-    return { favoritos: [...state.favoritos, name] };
-  }),
+  },
+
+  saveFavoritos: async (favoritos) => {
+    try {
+      const docRef = doc(db, 'favoritos', 'user');
+      await setDoc(docRef, { favoritos });
+      set({ favoritos });
+      console.log('Favoritos guardados con éxito en firebase.');
+    } catch (error) {
+      console.error('Error al guardar favoritos: ', error);
+    }
+  },
+
+  addFavorito: async (name) => {
+    set((state) => {
+      if (state.favoritos.includes(name)) {
+        return state;
+      }
+      const newFavoritos = [...state.favoritos, name];
+      useCardPokemon.getState().saveFavoritos(newFavoritos);
+      return { favoritos: newFavoritos };
+    });
+  },
 }));
 
 export default useCardPokemon;

@@ -24,14 +24,14 @@ const DetailCard = () => {
               <Card.Body className="text-center bg-white">
                 <Card.Title className="mb-3">{cardPoke.name}</Card.Title>
                 <Card.Text><strong>Tipo:</strong> {cardPoke.types[0].type.name}</Card.Text>
-                <Card.Text>
+                <div>
                   <strong>Habilidades:</strong>
                   <ul className="list-group">
                     {cardPoke.abilities.map((habilidad, index) => (
                       <li className="list-group-item border-0" key={index}>{habilidad.ability.name}</li>
                     ))}
                   </ul>
-                </Card.Text>
+                </div>
                 <Card.Text><strong>Estadísticas:</strong></Card.Text>
                 <Card.Text>Vida inicial: {cardPoke.stats[0].base_stat}</Card.Text>
                 <Card.Text>Ataque inicial: {cardPoke.stats[1].base_stat}</Card.Text>
